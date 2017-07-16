@@ -4,6 +4,7 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 import Divider from 'material-ui/Divider';
 import ListIcon from 'material-ui-icons/List';
 import GpsFixed from 'material-ui-icons/GpsFixed';
+import { Api } from '../Api.json';
 
 const s = {
   img: {
@@ -63,7 +64,7 @@ class OffersCat extends Component {
   state = {offers: []}
 
    componentDidMount(){
-     fetch('http://localhost:3001/proxy/api/v1/offer_categories')
+     fetch(`${Api}/proxy/api/v1/offer_categories`)
       .then(res => res.json())
       .then(results => this.setState({ offers: results.data}));
    }
@@ -90,7 +91,7 @@ class OffersCat extends Component {
           return(
               <OfferCategories
                 id={offer.id}
-                logo={'http://localhost:3001/uploads'+offer.logo}
+                logo={`${Api}/uploads`+offer.logo}
                 name={offer.name}
                 key={offer.id}
               />

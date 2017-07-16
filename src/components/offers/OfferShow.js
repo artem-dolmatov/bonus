@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Card, { CardContent } from 'material-ui/Card';
 import { CircularProgress } from 'material-ui/Progress';
+import { Api } from '../Api.json';
 
 const styles = {
   card: {
@@ -79,7 +80,7 @@ class OfferShow extends Component{
   }
 
   componentDidMount(){
-    fetch(`http://localhost:3001/proxy/api/v1/offers/${this.props.match.params.id}`)
+    fetch(`${Api}/proxy/api/v1/offers/${this.props.match.params.id}`)
       .then(res => res.json())
       .then(
         user => {
@@ -108,7 +109,7 @@ class OfferShow extends Component{
             <h2>{user.name}</h2>
             <Grid container style={styles.container}>
               <Grid item sm={8}>
-                <img src={'http://localhost:3001/uploads'+user.images[0]} style={styles.img} alt={user.name}/>
+                <img src={`${Api}/uploads`+user.images[0]} style={styles.img} alt={user.name}/>
               </Grid>
               <Grid item sm={4}>
                 <Card style={styles.cashback}>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CircularProgress } from 'material-ui/Progress';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
+import { Api } from '../Api.json';
 
 const styles = {
   card: {
@@ -85,7 +86,7 @@ class SimpleMediaCard extends Component {
   }
 
    componentDidMount(){
-     fetch('http://localhost:3001/proxy/api/v1/offers')
+     fetch(`${Api}/proxy/api/v1/offers`)
       .then(res => res.json())
       .then(results => this.setState({ offers: results.data }));
    }
@@ -105,7 +106,7 @@ class SimpleMediaCard extends Component {
           if ( idString === offer.offer_category_id) {
             return <Offer
               id={offer.id}
-              images={'http://localhost:3001/uploads'+offer.images[0]}
+              images={`${Api}/uploads`+offer.images[0]}
               percent={offer.percent}
               name={offer.name}
               key={offer.id}

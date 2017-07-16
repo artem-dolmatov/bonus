@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import { CircularProgress } from 'material-ui/Progress';
+import { Api } from '../Api.json';
 
 const styles = {
   card: {
@@ -91,7 +92,7 @@ class AllOffers extends Component {
   }
 
    componentDidMount(){
-     fetch('http://localhost:3001/proxy/api/v1/offers')
+     fetch(`${Api}/proxy/api/v1/offers`)
       .then(res => res.json())
       .then(results => this.setState({ offers: results.data}));
    }
@@ -109,7 +110,7 @@ class AllOffers extends Component {
         {this.state.offers.map(offer =>  {
           return <Offer
             id={offer.id}
-            images={'http://localhost:3001/uploads'+offer.images[0]}
+            images={`${Api}/uploads`+offer.images[0]}
             name={offer.name}
             percent={offer.percent}
             key={offer.id}

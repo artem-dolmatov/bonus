@@ -3,6 +3,7 @@ import Grid from 'material-ui/Grid';
 import Card, { CardContent } from 'material-ui/Card';
 import { CircularProgress } from 'material-ui/Progress';
 import { Api } from '../Api.json';
+import './OfferShow.css';
 
 const styles = {
   card: {
@@ -44,15 +45,12 @@ const styles = {
   cashback: {
     textAlign: 'center',
     height: '100%',
-    boxShadow: '0 5px 25px 0 rgba(102,102,153,.15)'
+    boxShadow: '0 5px 25px 0 rgba(102,102,153,.15)',
+    position: 'relative',
   },
   perc: {
     borderBottom: '1px solid #dbdbdb',
     paddingBottom: '6%'
-  },
-  percent: {
-    marginTop: '35%',
-    fontSize: '400%'
   },
   bold: {
     fontWeight: 400,
@@ -110,8 +108,15 @@ class OfferShow extends Component{
               </Grid>
               <Grid item sm={4}>
                 <Card style={styles.cashback}>
-                    <h2 style={styles.perc}>Ваша выгода</h2>
-                    <h1 style={styles.percent}>{user.percent} %</h1>
+                  <h2 style={styles.perc}>Ваша выгода</h2>
+                  <div className='romb'>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 188.45" fill="#00b0ff">
+                      <path class="discount-item_main_label_svg-path" d="M70.1,9.9c9.6-5.5,25.2-5.5,34.7,0l52.8,30.2C167.2,45.5,175,59,175,70v60c0,11-7.8,24.5-17.4,29.9l-52.8,30.2c-9.6,5.5-25.2,5.5-34.7,0L17.3,159.9C7.8,154.5,0,141,0,130V70C0,59,7.8,45.5,17.4,40.1Z" transform="translate(0 -5.77)"></path>
+                    </svg>
+                  </div>
+                  <div className='percent'>
+                    <h1 className='percentName'>{user.percent} %</h1>
+                  </div>
                 </Card>
               </Grid>
               <Grid item sm={8}>

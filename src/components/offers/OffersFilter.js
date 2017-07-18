@@ -100,6 +100,7 @@ class SimpleMediaCard extends Component {
      }
      let backId = this.props.match.params.id
      let idString = Number(backId)
+
      return(
        <div style={styles.blocks}>
         {this.state.offers.map(offer =>  {

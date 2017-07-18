@@ -55,7 +55,9 @@ function Offers(props) {
             <div className={classes.img_box}>
               <img src={vk} alt={vk} className={classes.img} />
               <img src={facebook} alt={facebook} className={classes.img} />
-              <img src={instagram} alt={instagram} className={classes.img} />
+              <a href='https://www.instagram.com/bonusget/'>
+                <img src={instagram} alt={instagram} className={classes.img} />
+              </a>
               <img src={odnoklassniki} alt={odnoklassniki} />
             </div>
         </Grid>

@@ -34,9 +34,6 @@ const styles = {
   blocks: {
     marginTop: '80px'
   },
-  load: {
-    padding: '30%'
-  },
   img: {
     width: '100%',
     boxShadow: '0 5px 25px 0 rgba(102,102,153,.15)'
@@ -135,6 +132,12 @@ class OfferShow extends Component{
                     <CardContent>
                       <h3 style={styles.bold}>Адреса</h3>
                       <h4>ул. {user.addresses[0].street}, {user.addresses[0].house}</h4>
+                    </CardContent>
+                  </Card>
+                </Grid>
+                <Grid item sm={12} style={styles.addresses}>
+                  <Card style={styles.card}>
+                    <CardContent>
                     </CardContent>
                   </Card>
                 </Grid>

@@ -43,7 +43,9 @@ function ButtonAppBar(props) {
       <AppBar position="static" className={classes.app}>
         <Toolbar>
           <IconButton>
-            <img className={classes.logo} src={Logo} alt=''/>
+            <NavLink className={classes.link} to='/'>
+              <img className={classes.logo} src={Logo} alt=''/>
+            </NavLink>            
           </IconButton>
           <Typography type="title" color="inherit" className={classes.flex}>
             <NavLink className={classes.link} to='/'>Бонусы</NavLink>

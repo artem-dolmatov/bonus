@@ -86,7 +86,7 @@ class SimpleMediaCard extends Component {
   }
 
    componentDidMount(){
-     fetch(`${Api}/proxy/api/v1/offers`)
+     fetch(`${Api}/proxy/api/v1/offers?per_page=500`)
       .then(res => res.json())
       .then(results => this.setState({ offers: results.data }));
    }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
 
-import Main from './Main';
+import Main from './main/Main';
 import Offers from './offers/Offers';
 
 class Body extends Component{

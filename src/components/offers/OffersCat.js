@@ -53,7 +53,7 @@ let OfferCategories = function(props) {
         <Link style={s.link} to={`/offers/category/${props.id}`}>
           <ListItem style={s.listItem} button>
             <img src={props.logo} alt='logo'/>
-            <p style={s.text}>{props.name}</p>
+            <p style={s.text}>{props.name}{props.length}</p>
           </ListItem>
         </Link>
     </List>
@@ -64,7 +64,7 @@ class OffersCat extends Component {
   state = {offers: []}
 
    componentDidMount(){
-     fetch(`${Api}/proxy/api/v1/offer_categories`)
+     fetch(`${Api}/proxy/api/v1/offer_categories?per_page=500`)
       .then(res => res.json())
       .then(results => this.setState({ offers: results.data}));
    }

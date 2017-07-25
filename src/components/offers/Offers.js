@@ -8,8 +8,6 @@ import OffersRoute from './OffersRoute';
 
 import vk from '../../images/vk.svg';
 import instagram from '../../images/instagram.svg';
-import facebook from '../../images/facebook-box.svg';
-import odnoklassniki from '../../images/odnoklassniki.svg';
 
 const styleSheet = createStyleSheet('Offers', theme => ({
   root: {
@@ -39,8 +37,9 @@ const styleSheet = createStyleSheet('Offers', theme => ({
   },
   img_box: {
     paddingTop: '15px',
-    paddingLeft: '8%',
-    marginBottom: '6%'
+    paddingLeft: '35%',
+    marginBottom: '6%',
+    borderTop: '1px solid #e7e7e7'
   },
 }));
 
@@ -53,12 +52,12 @@ function Offers(props) {
         <Grid className={classes.category} item sm={3}>
           <OffersCat />
             <div className={classes.img_box}>
-              <img src={vk} alt={vk} className={classes.img} />
-              <img src={facebook} alt={facebook} className={classes.img} />
-              <a href='https://www.instagram.com/bonusget/' target='_blank'>
+              <a href='https://vk.com/bonustmn' target='_blank' rel="noopener noreferrer">
+                <img src={vk} alt={vk} className={classes.img} />
+              </a>
+              <a href='https://www.instagram.com/bonusget/' target='_blank'rel="noopener noreferrer">
                 <img src={instagram} alt={instagram} className={classes.img} />
               </a>
-              <img src={odnoklassniki} alt={odnoklassniki} />
             </div>
         </Grid>
         <Grid item sm={3} />

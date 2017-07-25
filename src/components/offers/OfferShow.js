@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Card, { CardContent } from 'material-ui/Card';
 import { CircularProgress } from 'material-ui/Progress';
+import axios from 'axios';
 import { Api } from '../Api.json';
 import './OfferShow.css';
 
@@ -68,6 +69,14 @@ const styles = {
   },
 };
 
+let Reviews = function(props) {
+  return(
+    <div>
+
+    </div>
+  )
+}
+
 class OfferShow extends Component{
   constructor(){
     super();
@@ -84,6 +93,16 @@ class OfferShow extends Component{
           });
         }
       );
+  }
+
+  componentWillMount(){
+    axios.get(`${Api}/proxy/api/v1/reviews?offer_id=${this.props.match.params.id}`)
+      .then(reviews => {
+        this.setState({reviews: reviews.data});
+      })
+      .catch(error => {
+        console.log(error);
+      })
   }
 
   render() {
@@ -111,7 +130,7 @@ class OfferShow extends Component{
                   <h2 style={styles.perc}>Ваша выгода</h2>
                   <div className='romb'>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 175 188.45" fill="#00b0ff">
-                      <path class="discount-item_main_label_svg-path" d="M70.1,9.9c9.6-5.5,25.2-5.5,34.7,0l52.8,30.2C167.2,45.5,175,59,175,70v60c0,11-7.8,24.5-17.4,29.9l-52.8,30.2c-9.6,5.5-25.2,5.5-34.7,0L17.3,159.9C7.8,154.5,0,141,0,130V70C0,59,7.8,45.5,17.4,40.1Z" transform="translate(0 -5.77)"></path>
+                      <path d="M70.1,9.9c9.6-5.5,25.2-5.5,34.7,0l52.8,30.2C167.2,45.5,175,59,175,70v60c0,11-7.8,24.5-17.4,29.9l-52.8,30.2c-9.6,5.5-25.2,5.5-34.7,0L17.3,159.9C7.8,154.5,0,141,0,130V70C0,59,7.8,45.5,17.4,40.1Z" transform="translate(0 -5.77)"></path>
                     </svg>
                   </div>
                   <div className='percent'>
@@ -143,6 +162,7 @@ class OfferShow extends Component{
                 <Grid item sm={12} style={styles.addresses}>
                   <Card style={styles.card}>
                     <CardContent>
+                      <h3 style={styles.bold}>Отзывы</h3>
                     </CardContent>
                   </Card>
                 </Grid>

@@ -3,9 +3,10 @@ import { withStyles, createStyleSheet} from 'material-ui/styles';
 
 import Grid from 'material-ui/Grid';
 import Footer from './Footer';
+import './Main.css';
 
-import IphoneWhite from '../images/iphone.png';
-import IphoneBlack from '../images/iphone-7.png';
+import IphoneWhite from '../../images/iphone.png';
+import IphoneBlack from '../../images/iphone-7.png';
 
 const styleSheet = createStyleSheet('Main', theme => ({
   root: {
@@ -143,7 +144,8 @@ function Main(props) {
               <div className={classes.advantageDiv}>
                 <h3 className={classes.advantageH3}>Выбирай где получать скидку</h3>
                 <p>Самостоятельно предлогай интересные места в которых ты хотел бы получать бонусные баллы за покупки.</p>
-              </div>
+                <a href='#' className='offer'>Предложить заведение >>></a>
+            </div>
             </Grid>
             <Grid item xs={6}>
               <div className={classes.advantageDiv2}>

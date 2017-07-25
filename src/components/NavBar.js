@@ -45,10 +45,10 @@ function ButtonAppBar(props) {
           <IconButton>
             <NavLink className={classes.link} to='/'>
               <img className={classes.logo} src={Logo} alt=''/>
-            </NavLink>            
+            </NavLink>
           </IconButton>
           <Typography type="title" color="inherit" className={classes.flex}>
-            <NavLink className={classes.link} to='/'>Бонусы</NavLink>
+            <NavLink className={classes.link} to='/'>Bonus</NavLink>
           </Typography>
           <NavLink className={classes.link} to='/offers/all'>
             <Button color="contrast">Предложения</Button>

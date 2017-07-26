@@ -1,0 +1,23 @@
+.appstore {
+  width: 80%;
+  padding-top: 10%;
+}
+.googleplay {
+  width: 80%;
+}
+.bodySmall {
+  text-align: center;
+}
+.text {
+  padding-top: 40%;
+}
+@media (max-width: 767px) {
+  .bodyOffers {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+  .bodySmall {
+    display: none;
+  }
+}

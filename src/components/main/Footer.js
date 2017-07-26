@@ -41,7 +41,7 @@ class Footer extends Component {
   render() {
     return(
       <Grid container gutter={0} style={styles.footer}>
-        <Grid item sm={12}>
+        <Grid item xs={12}>
           <div style={styles.p}>
             <div style={styles.socMain}>
               <p>Мы в соцсетях:</p>

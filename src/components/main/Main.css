@@ -3,3 +3,57 @@
   float: right;
   text-decoration: underline;
 }
+.iphone {
+  margin: -40px;
+}
+.bonus {
+  width: 100%;
+  padding-top: 62px;
+}
+.bonus2 {
+  width: 100%;
+  padding-top: 50px;
+}
+.appstore2 {
+  width: 35%;
+  padding-top: 3%;
+}
+.googleplay2 {
+  width: 35%;
+  padding-left: 2%;
+}
+@media (min-width: 768px) {
+  .advantageDiv {
+    margin-right: 30%;
+  }
+}
+@media (max-width: 767px) {
+  .appstore2 {
+    width: 49%;
+    padding-top: 3%;
+  }
+  .googleplay2 {
+    width: 49%;
+    padding-left: 2%;
+  }
+}
+@media (width: 1024px) {
+  .bonus {
+    width: 100%;
+    padding-top: 260px;
+  }
+}
+@media (min-width: 1024px) {
+  .headerLeft {
+    padding: 7% 10% 5% 20%;
+  }
+}
+@media (max-width: 1023px) {
+  .bonus {
+    display: none;
+  }
+  .headerLeft {
+    padding: 5% 10% 5% 10%;
+    margin-bottom: -70px;
+  }
+}

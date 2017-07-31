@@ -1,0 +1,7 @@
+.card {
+  max-width: 490px;
+  margin-bottom: 10px;
+  margin-right: 5px;
+  margin-left: 5px;
+  box-shadow: 0 5px 25px 0 rgba(102,102,153,.15);
+}

@@ -1,3 +1,33 @@
+.cardContent {
+  width: 100%;
+}
+.reviews {
+  position: relative;
+  overflow-y: auto;
+  height: 4in;
+}
+.reviewDivider {
+  border-bottom: 1px solid #e7e7e7;
+}
+.reviewName {
+  float: left;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+.reviewRating {
+  text-align: right;
+  font-family: 'Roboto', sans-serif;
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #3fe09a;
+}
+.reviewMessage {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 14px;
+  margin-top: 2%;
+}
 .romb {
   position: absolute;
   left: 22%;

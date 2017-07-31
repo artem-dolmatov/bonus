@@ -56,39 +56,38 @@ const styles = {
     paddingTop: '30%',
     paddingLeft: '45%'
   },
+  company: {
+    position: 'absolute',
+    zIndex: '100',
+    color: 'white',
+    maxWidth: '490px',
+    width: '100%',
+    background: 'linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0))'
+  },
+  companyName: {
+    marginTop: '2%',
+    marginBottom: '3%',
+    marginLeft: '2%',
+    fontWeight: '400',
+    fontSize: '18px'
+  }
 };
 
-let Offer = function(props) {
-  return (
-    <div style={styles.block}>
-      <Link to={`/offers/id/${props.id}`} style={styles.link}>
-        <Card style={styles.card}>
-          <CardMedia>
-            <img src={props.images} alt={props.name} style={styles.img}/>
-            <span style={styles.span}></span>
-            <div style={styles.percent}>{props.percent} %</div>
-          </CardMedia>
-          <CardContent>
-            <Typography>
-              <h3 style={styles.name}>{props.name}</h3>
-            </Typography>
-          </CardContent>
-        </Card>
-      </Link>
-    </div>
-  )
-}
-
 class SimpleMediaCard extends Component {
-  constructor(){
-    super();
-    this.state = {};
-  }
+  state = {offers: [], companies: [], categories: []}
 
    componentDidMount(){
      fetch(`${Api}/proxy/api/v1/offers?per_page=500`)
       .then(res => res.json())
       .then(results => this.setState({ offers: results.data }));
+
+      fetch(`${Api}/proxy/api/v1/companies?per_page=500`)
+       .then(res => res.json())
+       .then(results => this.setState({ companies: results.data}));
+
+     fetch(`${Api}/proxy/api/v1/offer_categories?per_page=50`)
+      .then(res => res.json())
+      .then(results => this.setState({ categories: results.data}));
    }
 
    render(){
@@ -103,15 +102,42 @@ class SimpleMediaCard extends Component {
 
      return(
        <div style={styles.blocks}>
+        {this.state.categories.map(category => {
+          if (idString === category.id) {
+            return (
+              <div key={category.id}><h2>Категория "{category.name}"</h2></div>
+            )
+          }
+        })}
         {this.state.offers.map(offer =>  {
           if ( idString === offer.offer_category_id) {
-            return <Offer
-              id={offer.id}
-              images={`${Api}/uploads`+offer.images[0]}
-              percent={offer.percent}
-              name={offer.name}
-              key={offer.id}
-              />
+            return (
+              <div key={offer.id} style={styles.block}>
+                <Link to={`/offers/id/${offer.id}`} style={styles.link}>
+                  <Card style={styles.card}>
+                    {this.state.companies.map(company => {
+                      if (offer.company.id === company.id) {
+                        return (
+                          <div key={company.id} style={styles.company}>
+                            <h3 style={styles.companyName}>{company.name}</h3>
+                          </div>
+                        )
+                      }
+                    })}
+                    <CardMedia>
+                      <img src={`${Api}/uploads`+offer.images[0]} alt={offer.name} style={styles.img}/>
+                      <span style={styles.span}></span>
+                      <div style={styles.percent}>{offer.percent} %</div>
+                    </CardMedia>
+                    <CardContent>
+                      <Typography>
+                        <h3 style={styles.name}>{offer.name}</h3>
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                </Link>
+              </div>
+            )
           }
         })}
        </div>

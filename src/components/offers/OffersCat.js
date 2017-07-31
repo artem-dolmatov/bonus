@@ -47,26 +47,17 @@ const s = {
   }
 }
 
-let OfferCategories = function(props) {
-  return (
-    <List style={s.padding}>
-        <Link style={s.link} to={`/offers/category/${props.id}`}>
-          <ListItem style={s.listItem} button>
-            <img src={props.logo} alt='logo'/>
-            <p style={s.text}>{props.name}{props.length}</p>
-          </ListItem>
-        </Link>
-    </List>
-  )
-}
-
-class OffersCat extends Component {
-  state = {offers: []}
+export class OffersCat extends Component {
+  state = {offers: [], counts: []}
 
    componentDidMount(){
      fetch(`${Api}/proxy/api/v1/offer_categories?per_page=500`)
       .then(res => res.json())
       .then(results => this.setState({ offers: results.data}));
+
+    fetch(`${Api}/proxy/api/v1/offers?per_page=100`)
+      .then(result => result.json())
+      .then(results => this.setState({ counts: results.data}));
    }
 
    render(){
@@ -89,17 +80,22 @@ class OffersCat extends Component {
         </List>
         {this.state.offers.slice(1).map(offer =>  {
           return(
-              <OfferCategories
-                id={offer.id}
-                logo={`${Api}/uploads`+offer.logo}
-                name={offer.name}
-                key={offer.id}
-              />
+            <List key={offer.id} style={s.padding}>
+                <Link style={s.link} to={`/offers/category/${offer.id}`}>
+                  <ListItem style={s.listItem} button>
+                    <img src={`${Api}/uploads`+offer.logo} alt='logo'/>
+                    <p style={s.text}>{offer.name}</p>
+                    {this.state.counts.map(count => {
+                      if ( offer.id === count.offer_category_id) {
+                        return <div key={count.id}/>
+                      }
+                    })}
+                  </ListItem>
+                </Link>
+            </List>
           );
         })}
        </div>
      );
    }
 }
-
-export default (OffersCat);

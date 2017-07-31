@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import Grid from 'material-ui/Grid';
 import Card, { CardContent } from 'material-ui/Card';
 import { CircularProgress } from 'material-ui/Progress';
-import axios from 'axios';
 import { Api } from '../Api.json';
 import './OfferShow.css';
 
 const styles = {
   card: {
     display: 'flex',
-    boxShadow: '0 5px 25px 0 rgba(102,102,153,.15)'
+    boxShadow: '0 5px 25px 0 rgba(102,102,153,.15)',
+    margin: '1px 1% 2% 1px',
   },
   details: {
     display: 'flex',
@@ -69,19 +69,8 @@ const styles = {
   },
 };
 
-let Reviews = function(props) {
-  return(
-    <div>
-
-    </div>
-  )
-}
-
 class OfferShow extends Component{
-  constructor(){
-    super();
-    this.state = {};
-  }
+  state = {reviews: []}
 
   componentDidMount(){
     fetch(`${Api}/proxy/api/v1/offers/${this.props.match.params.id}`)
@@ -93,16 +82,10 @@ class OfferShow extends Component{
           });
         }
       );
-  }
 
-  componentWillMount(){
-    axios.get(`${Api}/proxy/api/v1/reviews?offer_id=${this.props.match.params.id}`)
-      .then(reviews => {
-        this.setState({reviews: reviews.data});
-      })
-      .catch(error => {
-        console.log(error);
-      })
+    fetch(`${Api}/proxy/api/v1/reviews/?offer_id=${this.props.match.params.id}`)
+     .then(res => res.json())
+     .then(results => this.setState({ reviews: results.data}));
   }
 
   render() {
@@ -160,11 +143,22 @@ class OfferShow extends Component{
                   </Card>
                 </Grid>
                 <Grid item sm={12} style={styles.addresses}>
-                  <Card style={styles.card}>
-                    <CardContent>
                       <h3 style={styles.bold}>Отзывы</h3>
-                    </CardContent>
-                  </Card>
+                      <div className='reviews'>
+                      {this.state.reviews.map(review => {
+                        return(
+                          <Card style={styles.card} key={review.id}>
+                            <CardContent className='cardContent'>
+                            <div className='reviewDivider'>
+                              <div className='reviewName'>{review.user.name}</div>
+                              <div className='reviewRating'>{review.rating} из 10</div>
+                            </div>
+                            <div className='reviewMessage'>{review.message}</div>
+                            </CardContent>
+                          </Card>
+                        )
+                      })}
+                      </div>
                 </Grid>
               </Grid>
             </Grid>

@@ -3,7 +3,7 @@ import Grid from 'material-ui/Grid';
 import PropTypes from 'prop-types';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 
-import OffersCat from './OffersCat';
+import { OffersCat } from './OffersCat';
 import OffersRoute from './OffersRoute';
 import './Offers.css';
 

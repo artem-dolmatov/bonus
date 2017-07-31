@@ -4,15 +4,9 @@ import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import { CircularProgress } from 'material-ui/Progress';
 import { Api } from '../Api.json';
+import './AllOffers.css';
 
 const styles = {
-  card: {
-    maxWidth: 490,
-    marginBottom: 10,
-    marginRight: 5,
-    marginLeft: 5,
-    boxShadow: '0 5px 25px 0 rgba(102,102,153,.15)'
-  },
   img: {
     width: '100%',
     maxHeight: 275
@@ -61,40 +55,35 @@ const s = {
   },
   link: {
     textDecoration: 'none'
+  },
+  company: {
+    position: 'absolute',
+    zIndex: '100',
+    color: 'white',
+    maxWidth: '490px',
+    width: '100%',
+    background: 'linear-gradient(to right, rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0))'
+  },
+  companyName: {
+    marginTop: '2%',
+    marginBottom: '3%',
+    marginLeft: '2%',
+    fontWeight: '400',
+    fontSize: '18px'
   }
-}
-
-let Offer = function(props) {
-  return (
-    <div style={styles.block}>
-      <Link to={`/offers/id/${props.id}`} style={s.link}>
-        <Card style={styles.card}>
-          <CardMedia>
-            <img src={props.images} alt={props.name} style={styles.img}/>
-            <span style={styles.span}></span>
-            <div style={styles.percent}>{props.percent} %</div>
-          </CardMedia>
-          <CardContent>
-            <Typography>
-              <h3 style={s.name}>{props.name}</h3>
-            </Typography>
-          </CardContent>
-        </Card>
-      </Link>
-    </div>
-  )
 }
 
 class AllOffers extends Component {
-  constructor(){
-    super();
-    this.state = {};
-  }
+  state = {offers: [], companies: []}
 
    componentDidMount(){
      fetch(`${Api}/proxy/api/v1/offers?per_page=500`)
       .then(res => res.json())
       .then(results => this.setState({ offers: results.data}));
+
+      fetch(`${Api}/proxy/api/v1/companies?per_page=500`)
+       .then(res => res.json())
+       .then(results => this.setState({ companies: results.data}));
    }
 
    render(){
@@ -108,13 +97,33 @@ class AllOffers extends Component {
        <div style={s.block}>
         <h2>Все предложения</h2>
         {this.state.offers.map(offer =>  {
-          return <Offer
-            id={offer.id}
-            images={`${Api}/uploads`+offer.images[0]}
-            name={offer.name}
-            percent={offer.percent}
-            key={offer.id}
-            />
+          return (
+            <div key={offer.id} style={styles.block}>
+              <Link to={`/offers/id/${offer.id}`} style={s.link}>
+                <Card className='card'>
+                  {this.state.companies.map(company => {
+                    if (offer.company.id === company.id) {
+                      return (
+                        <div key={company.id} style={s.company}>
+                          <h3 style={s.companyName}>{company.name}</h3>
+                        </div>
+                      )
+                    }
+                  })}
+                  <CardMedia>
+                    <img src={`${Api}/uploads`+offer.images[0]} alt={offer.name} style={styles.img}/>
+                    <span style={styles.span}></span>
+                    <div style={styles.percent}>{offer.percent} %</div>
+                  </CardMedia>
+                  <CardContent className='cardContent'>
+                    <Typography>
+                      <h3 style={s.name}>{offer.name}</h3>
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+          )
         })}
        </div>
      );

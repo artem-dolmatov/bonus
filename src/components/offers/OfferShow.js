@@ -70,7 +70,7 @@ const styles = {
 };
 
 class OfferShow extends Component{
-  state = {reviews: []}
+  state = {reviews: [], contacts: []}
 
   componentDidMount(){
     fetch(`${Api}/proxy/api/v1/offers/${this.props.match.params.id}`)
@@ -86,6 +86,10 @@ class OfferShow extends Component{
     fetch(`${Api}/proxy/api/v1/reviews/?offer_id=${this.props.match.params.id}`)
      .then(res => res.json())
      .then(results => this.setState({ reviews: results.data}));
+
+   fetch(`${Api}/proxy/api/v1/offers/?per_page=500`)
+    .then(res => res.json())
+    .then(results => this.setState({ contacts: results.data}));
   }
 
   render() {
@@ -122,6 +126,7 @@ class OfferShow extends Component{
                 </Card>
               </Grid>
               <Grid item sm={8}>
+                <div id="vk_like"></div>
                 <h3 style={styles.bold}>Информация</h3>
                 <h4 style={styles.desc}>{user.desc}</h4>
               </Grid>
@@ -130,7 +135,22 @@ class OfferShow extends Component{
                   <Card style={styles.card}>
                     <CardContent>
                       <h3 style={styles.bold}>Контакты</h3>
-                      <h4>тел.: <a href={'tel:'+user.addresses[0].phones[0].phone}>{user.addresses[0].phones[0].phone}</a></h4>
+                      {this.state.contacts.map(contact => {
+                        if (this.props.match.params.id == contact.id)
+                        return(
+                          <div>
+                            {contact.addresses.map(address => {
+                              return(
+                                <div>{address.phones.map(phone => {
+                                    return(
+                                      <div>{phone.phone}</div>
+                                    )
+                                  })}</div>
+                              )
+                            })}
+                          </div>
+                        )
+                      })}
                     </CardContent>
                   </Card>
                 </Grid>
@@ -138,7 +158,18 @@ class OfferShow extends Component{
                   <Card style={styles.card}>
                     <CardContent>
                       <h3 style={styles.bold}>Адреса</h3>
-                      <h4>ул. {user.addresses[0].street}, {user.addresses[0].house}</h4>
+                        {this.state.contacts.map(contact => {
+                          if (this.props.match.params.id == contact.id)
+                          return(
+                            <div>
+                              {contact.addresses.map(address => {
+                                return(
+                                  <div>ул.{address.street} {address.house}</div>
+                                )
+                              })}
+                            </div>
+                          )
+                        })}
                     </CardContent>
                   </Card>
                 </Grid>

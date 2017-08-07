@@ -177,14 +177,16 @@ function Main(props) {
             </Grid>
             <Grid item sm={6} xs={12}>
               <div className='advantageDiv2'>
-                <h3 className={classes.advantageh3}>Нужна помощь? Позвоните Нам!</h3>
+                <h3 className={classes.advantageh3}>Нужна помощь? Напишите Нам!</h3>
                 <p>Наши специалисты расскажут, как установить и использовать возможности приложения!</p>
+                <div id="vk_contact_us"></div>
               </div>
             </Grid>
           </Grid>
         </Grid>
         <Footer />
       </Grid>
+      <div id="vk_community_messages"></div>
     </div>
   );
 }

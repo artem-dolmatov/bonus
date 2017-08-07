@@ -74,12 +74,20 @@ const styles = {
 };
 
 class SimpleMediaCard extends Component {
-  state = {offers: [], companies: [], categories: []}
+  constructor(props){
+    super(props);
+    this.state = {
+      offers: [],
+      companies: [],
+      categories: [],
+      loading: true
+    }
+  }
 
    componentDidMount(){
      fetch(`${Api}/proxy/api/v1/offers?per_page=500`)
       .then(res => res.json())
-      .then(results => this.setState({ offers: results.data }));
+      .then(results => this.setState({ offers: results.data, loading: false }), 1500);
 
       fetch(`${Api}/proxy/api/v1/companies?per_page=500`)
        .then(res => res.json())
@@ -91,7 +99,9 @@ class SimpleMediaCard extends Component {
    }
 
    render(){
-     if (!this.state.offers) {
+     const { loading } = this.state;
+
+     if (loading) {
          return (
            <div style={styles.load}>
              <CircularProgress size={60}/>

@@ -125,8 +125,8 @@ class OfferShow extends Component{
                   </div>
                 </Card>
               </Grid>
-              <Grid item sm={8}>
-                <div id="vk_like"></div>
+              <Grid item sm={8}>               
+                <div id="vk_like" className='vkLike'></div>
                 <h3 style={styles.bold}>Информация</h3>
                 <h4 style={styles.desc}>{user.desc}</h4>
               </Grid>
